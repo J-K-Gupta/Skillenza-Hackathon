@@ -1,0 +1,34 @@
+/* Brief: This function takes Status as an input parameter and accordingly make the helmet usable/unusable.
+@param[in]: Status 
+-  Status is received through BLE module from the Bike.
+- Author: Jatin Kumar Gupta
+- Date: 20 Oct 2019
+*/
+
+#define STOP	0
+#define RESUME	1
+#define ONGOING	2
+void Lock_Unlock_Helmet(int);
+void BLE_Receive_Booking_Status();
+
+void BLE_Receive_Booking_Status()
+{
+	/*Source code to receive the status of the booking from the bike using BLE module
+	- Once the status is received than take the action of locking and unlocking the Helmet */
+	Lock_Unlock_Helmet(Staus_of_booking);
+}
+
+void Lock_Unlock_Helmet(int Status)
+{
+	switch(Status)
+	{
+		case STOP:
+			Send_Helmet_Block_cmd();	//Can also be automatically done with the help of GRAVITY
+			break;
+		case RESUME:
+			Send_Helmet_UnBlock_cmd();
+		case ONGOING:
+			Send_Helmet_UnBlock_cmd();
+			break;
+	}
+}
